@@ -3,7 +3,6 @@ package tiendaElectrodomesticos.parcial2;
 
 import static org.junit.Assert.assertEquals;
 
-
 import org.junit.Test;
 public class testTiendaElectrodomesticos {
 
@@ -24,7 +23,7 @@ public class testTiendaElectrodomesticos {
     public void testCalcularPrecioRefrigeradorDoblePuerta() {
 
         Tienda tienda = new Tienda();
-        Refrigerador refrigerador1 = new Refrigerador(1, "miHeladera", 800.0, 3, "LG", "nverter Lm57sxt Instaview 423", "Refrigerador", 400, "doble puerta");
+        Refrigerador refrigerador1 = new Refrigerador(1, "miHeladera", 800.0, 3, "LG", "Inverter Lm57sxt Instaview 423", "Refrigerador", 400, "doble puerta");
 
         tienda.agregarProducto(refrigerador1);
 
