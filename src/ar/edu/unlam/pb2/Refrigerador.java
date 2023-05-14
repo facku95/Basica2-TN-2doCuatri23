@@ -2,28 +2,38 @@ package ar.edu.unlam.pb2;
 
 public class Refrigerador extends Electrodomestico {
 	
-	private int capacidad;
-    private String tipoDeEnfriamiento;
+	private Integer capacidad;
+    private String tipoRefrigerador;
 
 	public Refrigerador(int codigo, String nombre, double precio, int cantidadDisponible, String marca, String modelo, String tipo, int capacidad,
-			String tipoDeEnfiamiento) {
-		super(codigo, nombre, precio, cantidadDisponible, marca, modelo, tipo);
+			String tipoRefrigerador) {
+	super(codigo, nombre, precio, cantidadDisponible, marca, modelo, tipo);
+	this.capacidad = capacidad;
+	this.tipoRefrigerador = tipoRefrigerador;
 	}
-
-	public int getCapacidad() {
+	
+	@Override
+    public Double calcularPrecioVenta(Integer cantidad) {
+        Double precioVenta = getPrecio() * cantidad;
+        if (tipoRefrigerador.equalsIgnoreCase("Doble puerta")) {
+            precioVenta *= 1.2; // aumentar el 20% del precio si es doble puerta
+        }
+        return precioVenta;
+    }
+	public Integer getCapacidad() {
 		return capacidad;
 	}
 
-	public void setCapacidad(int capacidad) {
+	public void setCapacidad(Integer capacidad) {
 		this.capacidad = capacidad;
 	}
 
 	public String getTipoDeEnfriamiento() {
-		return tipoDeEnfriamiento;
+		return tipoRefrigerador;
 	}
 
 	public void setTipoDeEnfriamiento(String tipoDeEnfriamiento) {
-		this.tipoDeEnfriamiento = tipoDeEnfriamiento;
+		this.tipoRefrigerador = tipoDeEnfriamiento;
 	}
 
 	

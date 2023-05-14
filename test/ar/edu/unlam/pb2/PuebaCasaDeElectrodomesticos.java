@@ -91,6 +91,22 @@ public class PuebaCasaDeElectrodomesticos {
 	}
 	
 	@Test
+    public void testQueNoSePuedaVenderMasProductosDeLosQueHayDisponibles() {
+
+		Tienda tienda;
+		final String NOMBRE = "La casa del audio";
+		final Long CUIT = 30678213094L;
+		tienda = new Tienda(NOMBRE,CUIT);
+        Lavarropa lavadora1 = new Lavarropa(3, "miLavadora", 650.0, 2, "Drean", "Next 7.09 Eco", "Lavadora", 400, "A");
+
+        tienda.agregarProducto(lavadora1);
+
+        tienda.registrarVenta(3, 3); //Se intenta registrar una venta de 3 lavadoras, cuando solo hay 2.
+
+        assertEquals(false, tienda.registrarVenta(3, 3));
+    }
+	
+	@Test
 	public void queSePuedaCalcularElTotalDeVentas() {
 	
 		//preparacion
@@ -100,7 +116,7 @@ public class PuebaCasaDeElectrodomesticos {
 		tienda = new Tienda(NOMBRE,CUIT);
 		Lavarropa lavarropa1;
 		Televisor televisor1;
-		lavarropa1 = new Lavarropa(1,"Lavadora 1", 600.0, 3, "Marca 1", "Modelo 1", "Tipo 1", 30, "Superior");
+		lavarropa1 = new Lavarropa(1,"Lavadora 1", 600.0, 3, "Marca 1", "Modelo 1", "Tipo 1", 10, "Superior");
 		televisor1 = new Televisor(2, "Televisor 1", 500.0, 5, "Marca 2", "Modelo 2", "Tipo 2", 50, "Full HD");
 		tienda.agregarProducto(lavarropa1);
 		tienda.agregarProducto(televisor1);
@@ -115,4 +131,52 @@ public class PuebaCasaDeElectrodomesticos {
 		//validacion
 		assertEquals(totalDeVentasEsperado, tienda.CalcularTotalVentas());
 	}
+	
+	@Test
+    public void testCalcularPrecioTelevisorConMasDe50Pulgadas() {
+
+		Tienda tienda;
+		final String NOMBRE = "La casa del audio";
+		final Long CUIT = 30678213094L;
+		tienda = new Tienda(NOMBRE,CUIT);
+        Televisor televisor1 = new Televisor(2, "miTelevisor", 500.0, 5, "Samsung", "UN55AU7000GXUG LED", "Televisor", 55, "4k");
+
+        tienda.agregarProducto(televisor1);
+
+        Double ve = (500.0  * 3 )* 1.1; // 10% mas cara si el tamaño es mayor a 50 pulgadas
+
+        assertEquals(ve, televisor1.calcularPrecioVenta(3), 0.1);
+}
+	@Test
+    public void testCalcularPrecioRefrigeradorDoblePuerta() {
+
+		Tienda tienda;
+		final String NOMBRE = "La casa del audio";
+		final Long CUIT = 30678213094L;
+		tienda = new Tienda(NOMBRE,CUIT);
+        Refrigerador refrigerador1 = new Refrigerador(1, "miHeladera", 800.0, 3, "LG", "Inverter Lm57sxt Instaview 423", "Refrigerador", 400, "Doble puerta");
+
+        tienda.agregarProducto(refrigerador1);
+
+        Double ve = (800.0  * 2 )* 1.2; // 20% mas cara si es de tipoRefrigerador doble puerta
+
+        assertEquals(ve, refrigerador1.calcularPrecioVenta(2), 0.1);
+    }
+
+
+	@Test
+    public void testCalcularPrecioLavadoraConCargFrontal() {
+
+		Tienda tienda;
+		final String NOMBRE = "La casa del audio";
+		final Long CUIT = 30678213094L;
+		tienda = new Tienda(NOMBRE,CUIT);
+        Lavarropa lavadora  = new Lavarropa(1, "miLavadora", 800.0, 3, "Drean", "Next 7.09 Eco3", "Lavadora", 30, "frontal");
+
+        tienda.agregarProducto(lavadora);
+
+        double ve = 800.0 + 50 + 100; // 50 de recargo por tipo de carga, y 100 por exceder la capacidad
+
+        assertEquals(ve, lavadora.calcularPrecioVenta(1), 0.1);
+    }
 }

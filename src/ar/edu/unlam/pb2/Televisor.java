@@ -14,7 +14,15 @@ public class Televisor extends Electrodomestico {
 		this.resolucion = resolucion;
 	}
 
-
+	@Override
+    public Double calcularPrecioVenta(Integer cantidad) {
+        Double precioVenta = getPrecio() * cantidad;
+        if (tamaño > 50) {
+            precioVenta *= 1.1; // aumentar el 10% del precio si es mayor a 50 pulgadas
+        }
+        return precioVenta;
+    }
+	
 	public double getTamaño() {
 		return tamaño;
 	}

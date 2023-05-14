@@ -17,7 +17,7 @@ public class Tienda {
 		this.cuit = cuit;
 		this.productos = new ArrayList<>();
 	}
-
+	
 	public void agregarProducto(Producto producto) {
 		this.productos.add(producto);
 			
@@ -27,25 +27,34 @@ public class Tienda {
 		return productos.size();
 	}
 
-	public String getNombre() {
-		return nombre;
+	
+
+	public Boolean registrarVenta(Integer codigo , Integer cantidad) {
+		Boolean resultado = false;
+		Producto producto = buscarProducto(codigo);
+		if(producto != null && producto.getCantidadDisponible()>= cantidad) {
+			producto.registrarVenta(cantidad);
+			resultado = true;
+		}
+		return resultado;	
 	}
 
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	private Producto buscarProducto(Integer codigo) {
+		for(Producto producto : productos) {
+			if(producto.getCodigo() == codigo) {
+				return producto;
+			}
+		}
+		return null;
 	}
 
-
-	public Long getCuit() {
-		return cuit;
+	public Double CalcularTotalVentas() {
+		Double totalVentas = 0.0;
+		for(Producto producto: productos)
+			totalVentas += producto.calcularPrecioVenta(1);
+		return totalVentas;
 	}
-
-
-	public void setCuit(Long cuit) {
-		this.cuit = cuit;
-	}
-
+	
 	public String toString() {
 		String resultado = "";
 		
@@ -65,35 +74,21 @@ public class Tienda {
 		
 	}
 
-	public Boolean registrarVenta(Integer codigo , Integer cantidad) {
-		Boolean resultado = false;
-		Producto producto = buscarProducto(codigo);
-		if(producto != null && producto.getCantidadDisponible()>= cantidad) {
-			producto.registrarVenta(cantidad);
-			resultado = true;
-		}
-		return resultado;
-		
-	}
-
-	private Producto buscarProducto(Integer codigo) {
-		for(Producto producto : productos) {
-			if(producto.getCodigo() == codigo) {
-				return producto;
-			}
-		}
-		return null;
-	}
-
-	public Double CalcularTotalVentas() {
-		Double totalVentas = 0.0;
-		for(Producto producto: productos)
-			totalVentas += producto.calcularPrecioVenta(1);
-		return totalVentas;
+	public String getNombre() {
+		return nombre;
 	}
 
 
-	
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
 
+	public Long getCuit() {
+		return cuit;
+	}
+
+	public void setCuit(Long cuit) {
+		this.cuit = cuit;
+	}
 }
