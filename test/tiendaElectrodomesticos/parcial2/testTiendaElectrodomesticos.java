@@ -57,8 +57,20 @@ public class testTiendaElectrodomesticos {
 
         assertEquals(ve, lavadora.calcularPrecioVenta(1), 0.1);
     }
+	
+	@Test
+    public void testBuscarProducto() {
 
+        Tienda tienda = new Tienda();
+        Refrigerador refrigerador1 = new Refrigerador(1, "miHeladera", 800.0, 3, "LG", "Inverter Lm57sxt Instaview 423", "Refrigerador", 400, "doble puerta");
 
+        tienda.agregarProducto(refrigerador1);
+        
+        tienda.buscarProducto(1);
+
+        assertEquals(tienda.buscarProducto(refrigerador1.getCodigo()), refrigerador1);
+     
+    }
 
 }
 
