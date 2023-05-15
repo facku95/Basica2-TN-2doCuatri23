@@ -10,8 +10,6 @@ public class Tienda {
 	private Long cuit;
 	List<Producto> productos;
 	
-	
-	
 	public Tienda(String nombre, Long cuit) {
 		this.nombre = nombre;
 		this.cuit = cuit;
@@ -27,8 +25,6 @@ public class Tienda {
 		return productos.size();
 	}
 
-	
-
 	public Boolean registrarVenta(Integer codigo , Integer cantidad) {
 		Boolean resultado = false;
 		Producto producto = buscarProducto(codigo);
@@ -38,14 +34,25 @@ public class Tienda {
 		}
 		return resultado;	
 	}
-
-	private Producto buscarProducto(Integer codigo) {
-		for(Producto producto : productos) {
+	public Producto buscarProducto(Integer codigo) {
+		for(Producto producto : this.productos) {
 			if(producto.getCodigo() == codigo) {
 				return producto;
 			}
+			break;
 		}
 		return null;
+	}
+	
+	public Boolean hayProducto(Integer codigo) {
+		Boolean estado=null;
+		for(Producto producto : productos) {
+			if(productos.contains(codigo)) {
+			estado=true;
+			}else estado=false;
+			
+		}
+		return estado;
 	}
 
 	public Double CalcularTotalVentas() {

@@ -35,6 +35,9 @@ public class Refrigerador extends Electrodomestico {
 	public void setTipoDeEnfriamiento(String tipoDeEnfriamiento) {
 		this.tipoRefrigerador = tipoDeEnfriamiento;
 	}
-
+	@Override
+	public String toString() {
+		return ""+codigo+nombre+precio+cantidadDisponible+marca+modelo+tipo+capacidad;
+	}
 	
 }

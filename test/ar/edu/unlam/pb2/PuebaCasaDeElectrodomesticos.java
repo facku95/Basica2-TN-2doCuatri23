@@ -2,7 +2,10 @@ package ar.edu.unlam.pb2;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
+
 
 public class PuebaCasaDeElectrodomesticos {
 
@@ -179,4 +182,92 @@ public class PuebaCasaDeElectrodomesticos {
 
         assertEquals(ve, lavadora.calcularPrecioVenta(1), 0.1);
     }
+	
+	//test Angel Santillan
+	@Test
+	public void queNoSePuedaVenderTVSinStock() {
+		//Preparación
+		Tienda tienda;
+		tienda = new Tienda("Garcarino",897856412L);
+		
+		final Integer compraSolicitada=50;
+		final Integer Stock=20;
+		Televisor tv1;
+		tv1 = new Televisor(001,"TV",150.0, Stock,"Samsung","HL25","Televisor",43,"Full-HD");
+		//ejecución
+		tienda.registrarVenta(tv1.getCodigo(),compraSolicitada);
+		//validacion
+		assertFalse(tienda.registrarVenta(tv1.getCodigo(),compraSolicitada));
+		
+	}
+	@Test
+	public void queNoSePuedaVenderHeladeraSinStock() {
+		//Preparación
+		Tienda tienda;
+		tienda = new Tienda("Garcarino",897856412L);
+				
+		final Integer compraSolicitada=50;
+		final Integer Stock=20;
+		Refrigerador dream1;
+		dream1 = new Refrigerador(0, null,0.0, Stock, null, null, null,0, null);
+		
+		Boolean check = tienda.registrarVenta(dream1.getCodigo(),compraSolicitada);
+		
+		assertFalse(check);
+		
+	}
+	@Test
+	public void queSePuedaBuscarUnaTV() {
+		Tienda tienda;
+		tienda = new Tienda("Garcarino",897856412L);
+		
+		int id=666;
+		Televisor tv1;
+		tv1 = new Televisor(id, null, 0, 0, null, null, null, 0, null);
+		
+		tienda.agregarProducto(tv1);
+		
+		assertFalse(tienda.hayProducto(tv1.getCodigo()));
+	
+	}
+	@Test
+	public void queNoSePuedaRegistrarUnaVenta() {
+		//preparacion
+		Tienda tienda;
+		final String NOMBRE = "Megatone";
+		final Long CUIT = 6478135L;
+		tienda = new Tienda(NOMBRE,CUIT);
+		Lavarropa lavarropa1;
+		lavarropa1 = new Lavarropa(1,"Lavadora 1", 600.0, 1, "Marca 1", "Modelo 1", "Tipo 1", 30, "Superior");
+		tienda.agregarProducto(lavarropa1);
+		Integer cantidadDisponibleEsperada = 1;
+		
+		//ejecucion
+		
+		
+		//validacion
+		assertFalse(tienda.registrarVenta(1, 2));
+		
+		
+	}
+	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

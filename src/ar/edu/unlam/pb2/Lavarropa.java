@@ -41,6 +41,10 @@ public class Lavarropa extends Electrodomestico {
 		this.tipoDeCarga = tipoDeCarga;
 	}
 	
+	@Override
+	public String toString() {
+	return ""+codigo+nombre+precio+cantidadDisponible+marca+modelo;
+	}
     
     
 
