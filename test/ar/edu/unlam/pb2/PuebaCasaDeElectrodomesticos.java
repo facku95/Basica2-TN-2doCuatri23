@@ -186,7 +186,7 @@ public class PuebaCasaDeElectrodomesticos {
 	//test Angel Santillan
 	@Test
 	public void queNoSePuedaVenderTVSinStock() {
-		//Preparación
+		//Preparaciï¿½n
 		Tienda tienda;
 		tienda = new Tienda("Garcarino",897856412L);
 		
@@ -194,7 +194,7 @@ public class PuebaCasaDeElectrodomesticos {
 		final Integer Stock=20;
 		Televisor tv1;
 		tv1 = new Televisor(001,"TV",150.0, Stock,"Samsung","HL25","Televisor",43,"Full-HD");
-		//ejecución
+		//ejecuciï¿½n
 		tienda.registrarVenta(tv1.getCodigo(),compraSolicitada);
 		//validacion
 		assertFalse(tienda.registrarVenta(tv1.getCodigo(),compraSolicitada));
@@ -202,7 +202,7 @@ public class PuebaCasaDeElectrodomesticos {
 	}
 	@Test
 	public void queNoSePuedaVenderHeladeraSinStock() {
-		//Preparación
+		//Preparaciï¿½n
 		Tienda tienda;
 		tienda = new Tienda("Garcarino",897856412L);
 				
@@ -221,13 +221,13 @@ public class PuebaCasaDeElectrodomesticos {
 		Tienda tienda;
 		tienda = new Tienda("Garcarino",897856412L);
 		
-		int id=666;
+		Integer id=666;
 		Televisor tv1;
-		tv1 = new Televisor(id, null, 0, 0, null, null, null, 0, null);
+		tv1 = new Televisor(id, null, 0.0, id, null, null, null, id, null);
 		
 		tienda.agregarProducto(tv1);
 		
-		assertFalse(tienda.hayProducto(tv1.getCodigo()));
+		assertEquals(tv1,tienda.buscarProducto(tv1.getCodigo()));
 	
 	}
 	@Test
@@ -248,10 +248,7 @@ public class PuebaCasaDeElectrodomesticos {
 		//validacion
 		assertFalse(tienda.registrarVenta(1, 2));
 		
-		
 	}
-	
-	
 	
 }
 

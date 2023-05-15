@@ -5,7 +5,7 @@ public class Refrigerador extends Electrodomestico {
 	private Integer capacidad;
     private String tipoRefrigerador;
 
-	public Refrigerador(int codigo, String nombre, double precio, int cantidadDisponible, String marca, String modelo, String tipo, int capacidad,
+	public Refrigerador(Integer codigo, String nombre, Double precio, Integer cantidadDisponible, String marca, String modelo, String tipo, Integer capacidad,
 			String tipoRefrigerador) {
 	super(codigo, nombre, precio, cantidadDisponible, marca, modelo, tipo);
 	this.capacidad = capacidad;

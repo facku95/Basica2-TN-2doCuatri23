@@ -6,7 +6,7 @@ public class Televisor extends Electrodomestico {
     private String resolucion;
 	
 	
-	public Televisor(int codigo, String nombre, double precio, int cantidadDisponible, String marca, String modelo, String tipo, int tamano,
+	public Televisor(Integer codigo, String nombre, Double precio, Integer cantidadDisponible, String marca, String modelo, String tipo, Integer tamano,
 			String resolucion){
 		super(codigo, nombre, precio, cantidadDisponible, marca, modelo, tipo);
 		

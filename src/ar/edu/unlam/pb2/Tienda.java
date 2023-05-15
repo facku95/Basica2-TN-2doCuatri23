@@ -43,17 +43,6 @@ public class Tienda {
 		}
 		return null;
 	}
-	
-	public Boolean hayProducto(Integer codigo) {
-		Boolean estado=null;
-		for(Producto producto : productos) {
-			if(productos.contains(codigo)) {
-			estado=true;
-			}else estado=false;
-			
-		}
-		return estado;
-	}
 
 	public Double CalcularTotalVentas() {
 		Double totalVentas = 0.0;
